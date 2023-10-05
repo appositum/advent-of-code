@@ -5,8 +5,7 @@ solve :: String -> Int
 solve = sum . map (solve' . split) . lines
 
 solve' :: [Int] -> Int
-solve' dim = smallest_perimeter dim + volume dim
-  where volume = foldr (*) 1
+solve' dim = smallest_perimeter dim + product dim
 
 smallest_perimeter :: [Int] -> Int
 smallest_perimeter [l, w, h] = minimum [p1, p2, p3]

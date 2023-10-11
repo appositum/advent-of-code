@@ -66,7 +66,7 @@ fn main() {
 
     for i in 0..999 {
         for j in 0..999 {
-            match m[i][j] {
+            match matrix[i][j] {
                 On => {
                     lit += 1;
                 }

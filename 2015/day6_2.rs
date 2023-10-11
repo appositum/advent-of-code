@@ -1,6 +1,6 @@
 #[derive(Debug, Clone, Copy)]
 struct Light {
-    brightness: u64
+    brightness: u64,
 }
 
 #[derive(Debug)]
@@ -14,7 +14,7 @@ enum Cmd {
 struct Instruction {
     cmd: Cmd,
     start: (usize, usize),
-    end: (usize, usize)
+    end: (usize, usize),
 }
 
 impl Light {
@@ -30,7 +30,7 @@ impl Light {
             }
             IncBrightness2 => {
                 self.brightness += 2;
-            },
+            }
         }
     }
 }
@@ -76,13 +76,11 @@ fn parse(s: &str) -> Instruction {
 
     let cmd = match iter.next().unwrap() {
         "toggle" => IncBrightness2,
-        "turn" => {
-            match iter.next().unwrap() {
-                "on" => IncBrightness,
-                _ => DecBrightness
-            }
-        }
-        _ => panic!("invalid format")
+        "turn" => match iter.next().unwrap() {
+            "on" => IncBrightness,
+            _ => DecBrightness,
+        },
+        _ => panic!("invalid format"),
     };
 
     let start: Vec<usize> = iter
@@ -100,6 +98,6 @@ fn parse(s: &str) -> Instruction {
     Instruction {
         cmd: cmd,
         start: (start[0], start[1]),
-        end: (end[0], end[1])
+        end: (end[0], end[1]),
     }
 }

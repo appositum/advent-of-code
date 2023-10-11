@@ -15,7 +15,7 @@ enum Cmd {
 struct Instruction {
     cmd: Cmd,
     start: (usize, usize),
-    end: (usize, usize)
+    end: (usize, usize),
 }
 
 impl Light {
@@ -67,8 +67,10 @@ fn main() {
     for i in 0..999 {
         for j in 0..999 {
             match m[i][j] {
-                On => { lit += 1; },
-                Off => ()
+                On => {
+                    lit += 1;
+                }
+                Off => (),
             }
         }
     }
@@ -83,13 +85,11 @@ fn parse(s: &str) -> Instruction {
 
     let cmd = match iter.next().unwrap() {
         "toggle" => Toggle,
-        "turn" => {
-            match iter.next().unwrap() {
-                "on" => TurnOn,
-                _ => TurnOff
-            }
-        }
-        _ => panic!("invalid format")
+        "turn" => match iter.next().unwrap() {
+            "on" => TurnOn,
+            _ => TurnOff,
+        },
+        _ => panic!("invalid format"),
     };
 
     let start: Vec<usize> = iter
@@ -107,6 +107,6 @@ fn parse(s: &str) -> Instruction {
     Instruction {
         cmd: cmd,
         start: (start[0], start[1]),
-        end: (end[0], end[1])
+        end: (end[0], end[1]),
     }
 }

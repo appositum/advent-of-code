@@ -8,3 +8,4 @@ solve' :: Int -> String -> Int
 solve' n [] = n
 solve' n ('(':xs) = solve' (n+1) xs
 solve' n (')':xs) = solve' (n-1) xs
+solve' n (_:xs) = solve' n xs

@@ -14,6 +14,8 @@ fn main() {
         result = populate(&input, result);
     }
 
+    println!("part 1: {:?}", result.get("a").unwrap());
+
     let wire_a = result.get("a").unwrap().to_string();
     let pos = input.iter().position(|x| x[1] == "b").unwrap();
     input[pos][0] = &wire_a;
@@ -24,7 +26,7 @@ fn main() {
         result = populate(&input, result);
     }
 
-    println!("wire a: {:?}", result.get("a").unwrap());
+    println!("part 2: {:?}", result.get("a").unwrap());
 }
 
 fn populate<'a>(

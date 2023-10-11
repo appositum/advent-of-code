@@ -1,10 +1,16 @@
 import Data.Set (fromList, union)
 
 main :: IO ()
-main = readFile "inputs/day3.txt" >>= print . solve
+main = do
+  input <- readFile "inputs/day3.txt"
+  putStrLn $ "part 1: " ++ show (part1 input)
+  putStrLn $ "part 2: " ++ show (part2 input)
 
-solve :: String -> Int
-solve str =
+part1 :: String -> Int
+part1 = length . fromList . scanl move (0, 0)
+
+part2 :: String -> Int
+part2 str =
     let santa = fst <$> split str
         robot = snd <$> split str
         scan  = fromList . scanl move (0, 0)

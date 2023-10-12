@@ -1,14 +1,19 @@
 #[derive(Debug, Clone, Copy)]
-enum Light {
+enum LightPt1 {
     On,
     Off,
 }
 
+#[derive(Debug, Clone, Copy)]
+struct LightPt2 {
+    brightness: u64,
+}
+
 #[derive(Debug)]
 enum Cmd {
-    TurnOn,
-    TurnOff,
-    Toggle,
+    TurnOn, // pt2: increase brightness
+    TurnOff, // pt2: decrease brightness
+    Toggle, // pt2: increase brightness (+2)
 }
 
 #[derive(Debug)]
@@ -18,7 +23,7 @@ struct Instruction {
     end: (usize, usize),
 }
 
-impl Light {
+impl LightPt1 {
     fn exec(&mut self, cmd: &Cmd) {
         match cmd {
             TurnOn => {
@@ -39,8 +44,34 @@ impl Light {
     }
 }
 
+impl LightPt2 {
+    fn exec(&mut self, cmd: &Cmd) {
+        match cmd {
+            TurnOn => {
+                self.brightness += 1;
+            }
+            TurnOff => {
+                if self.brightness > 0 {
+                    self.brightness -= 1;
+                }
+            }
+            Toggle => {
+                self.brightness += 2;
+            }
+        }
+    }
+}
+
 impl Instruction {
-    fn run(self, matrix: &mut [[Light; 1000]; 1000]) {
+    fn run1(self, matrix: &mut Vec<Vec<LightPt1>>) {
+        for i in self.start.0..(self.end.0 + 1) {
+            for j in self.start.1..(self.end.1 + 1) {
+                matrix[i][j].exec(&self.cmd);
+            }
+        }
+    }
+
+    fn run2(self, matrix: &mut Vec<Vec<LightPt2>>) {
         for i in self.start.0..(self.end.0 + 1) {
             for j in self.start.1..(self.end.1 + 1) {
                 matrix[i][j].exec(&self.cmd);
@@ -51,31 +82,42 @@ impl Instruction {
 
 use std::fs;
 use Cmd::*;
-use Light::*;
+use LightPt1::*;
 
 fn main() {
     let f = fs::read_to_string("inputs/day6.txt").unwrap();
     let lines: Vec<&str> = f.lines().collect();
-    let mut matrix = [[Off; 1000]; 1000];
+
+    let mut matrix1 = vec![vec![Off; 1000]; 1000];
+    let mut matrix2 = vec![vec![LightPt2 { brightness: 0 }; 1000]; 1000];
 
     for instruction in lines {
-        parse(instruction).run(&mut matrix);
+        parse(instruction).run1(&mut matrix1);
+        parse(instruction).run2(&mut matrix2);
     }
 
-    let mut lit = 0;
+    let mut lit_lamps = 0;
 
     for i in 0..999 {
         for j in 0..999 {
-            match matrix[i][j] {
+            match matrix1[i][j] {
                 On => {
-                    lit += 1;
+                    lit_lamps += 1;
                 }
                 Off => (),
             }
         }
     }
 
-    println!("{}", lit);
+    let mut total_brightness = 0;
+
+    for i in 0..999 {
+        for j in 0..999 {
+            total_brightness += matrix2[i][j].brightness;
+        }
+    }
+
+    println!("part 1: {}\npart 2: {}", lit_lamps, total_brightness);
 }
 
 fn parse(s: &str) -> Instruction {

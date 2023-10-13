@@ -2,7 +2,7 @@ import Data.List (isInfixOf)
 
 main :: IO ()
 main = do
-  input <- lines <$> readFile "inputs/day5.txt"
+  input <- lines <$> readFile "inputs/day05.txt"
   putStrLn $ "part 1: " ++ show (part1 input)
   putStrLn $ "part 2: " ++ show (part2 input)
 

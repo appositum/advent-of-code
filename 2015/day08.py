@@ -1,7 +1,7 @@
 from ast import literal_eval as unescape
 
 def main():
-    with open("inputs/day8.txt", "rb") as f:
+    with open("inputs/day08.txt", "rb") as f:
         text = f.readlines()
         a, b = solve(text)
 

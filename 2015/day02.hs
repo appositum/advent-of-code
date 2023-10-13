@@ -1,6 +1,6 @@
 main :: IO ()
 main = do
-  input <- readFile "inputs/day2.txt"
+  input <- readFile "inputs/day02.txt"
   putStrLn $ "part 1: " ++ show (solve part1 input)
   putStrLn $ "part 2: " ++ show (solve part2 input)
 

@@ -85,7 +85,7 @@ use Cmd::*;
 use LightPt1::*;
 
 fn main() {
-    let f = fs::read_to_string("inputs/day6.txt").unwrap();
+    let f = fs::read_to_string("inputs/day06.txt").unwrap();
     let lines: Vec<&str> = f.lines().collect();
 
     let mut matrix1 = vec![vec![Off; 1000]; 1000];

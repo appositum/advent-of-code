@@ -2,7 +2,7 @@ import Prelude hiding (floor)
 
 main :: IO ()
 main = do
-    input <- readFile "inputs/day1.txt"
+    input <- readFile "inputs/day01.txt"
     putStrLn $ "part 1: " ++ show (part1 input)
     putStrLn $ "part 2: " ++ show (part2 input)
 

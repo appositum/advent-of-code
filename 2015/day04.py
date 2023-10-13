@@ -1,8 +1,11 @@
 from hashlib import md5
 
 def main():
-    print(f"part 1: {solve('ckczppom', 5)}")
-    print(f"part 2: {solve('ckczppom', 6)}")
+    with open('inputs/day04.txt', 'r') as f:
+        cont = f.read().strip()
+
+        print(f"part 1: {solve(cont, 5)}")
+        print(f"part 2: {solve(cont, 6)}")
 
 def solve(key: str, zeroes: int) -> int:
     number = 0

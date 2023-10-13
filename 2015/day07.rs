@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::fs;
 
 fn main() {
-    let f = fs::read_to_string("inputs/day7.txt").unwrap();
+    let f = fs::read_to_string("inputs/day07.txt").unwrap();
     let mut input: Vec<Vec<&str>> = f
         .lines()
         .map(|c| c.split(" -> ").collect::<Vec<&str>>())

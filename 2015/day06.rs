@@ -11,9 +11,9 @@ struct LightPt2 {
 
 #[derive(Debug)]
 enum Cmd {
-    TurnOn, // pt2: increase brightness
+    TurnOn,  // pt2: increase brightness
     TurnOff, // pt2: decrease brightness
-    Toggle, // pt2: increase brightness (+2)
+    Toggle,  // pt2: increase brightness (+2)
 }
 
 #[derive(Debug)]

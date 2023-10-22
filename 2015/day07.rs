@@ -74,7 +74,7 @@ fn populate<'a>(
                 }
             }
             _ => {
-                panic!("opora");
+                panic!("invalid instruction");
             }
         }
     }

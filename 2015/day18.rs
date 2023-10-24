@@ -5,7 +5,7 @@ fn main() {
     let mut input: Vec<Vec<char>> = f.lines().map(|s| s.chars().collect()).collect();
 
     println!("part 1: {}", solve(input.clone(), 100, false));
-    let i = input.len()-1;
+    let i = input.len() - 1;
     input[0][0] = '#';
     input[0][i] = '#';
     input[i][0] = '#';
@@ -17,11 +17,11 @@ fn light_new_state(matrix: &Vec<Vec<char>>, coord: (usize, usize), stuck_lights:
     let (x, y) = coord;
     let mut neighbors = vec![];
 
-    let startx = if x > 0 { x-1 } else { x };
-    let endx = if x+1 >= matrix.len() { x+1 } else { x+2 };
+    let startx = if x > 0 { x - 1 } else { x };
+    let endx = if x + 1 >= matrix.len() { x + 1 } else { x + 2 };
 
-    let starty = if y > 0 { y-1 } else { y };
-    let endy = if y+1 >= matrix.len() { y+1 } else { y+2 };
+    let starty = if y > 0 { y - 1 } else { y };
+    let endy = if y + 1 >= matrix.len() { y + 1 } else { y + 2 };
 
     for i in startx..endx {
         for j in starty..endy {
@@ -40,22 +40,22 @@ fn light_new_state(matrix: &Vec<Vec<char>>, coord: (usize, usize), stuck_lights:
         match (x, y) {
             (0, 0) => {
                 return '#';
-            },
+            }
             (x, 0) => {
-                if x == matrix.len()-1 {
+                if x == matrix.len() - 1 {
                     return '#';
                 }
-            },
+            }
             (0, y) => {
-                if y == matrix.len()-1 {
+                if y == matrix.len() - 1 {
                     return '#';
                 }
-            },
+            }
             (x, y) => {
-                if x == matrix.len()-1 && y == matrix.len()-1 {
+                if x == matrix.len() - 1 && y == matrix.len() - 1 {
                     return '#';
                 }
-            },
+            }
         }
     }
 
